@@ -1,4 +1,9 @@
 ---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Navigation from '../components/Navigation.astro';
+import '../styles/global.css';
+
 const pageTitle = 'About Me';
 
 const identity = {
@@ -13,6 +18,10 @@ const skills = ['HTML', 'CSS', 'JavaScript', 'React', 'Astro', 'Writing Docs'];
 const happy = true;
 const finished = false;
 const goal = 3;
+
+const skillColor = 'navy';
+const fontWeight = 'bold';
+const fontCase = 'uppercase';
 ---
 
 <!DOCTYPE html>
@@ -22,12 +31,22 @@ const goal = 3;
     <meta http-equiv='X-UA-Compatible' content='IE=edge' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>{pageTitle}</title>
+    <style define:vars={{ skillColor, fontWeight, fontCase }}>
+      h1 {
+        color: purple;
+        font-size: 4rem;
+      }
+
+      .skill {
+        color: var(--skillColor);
+        font-weight: var(--fontWeight);
+        text-transform: var(--fontCase);
+      }
+    </style>
   </head>
   <body>
-    <a href='/'>Home</a>
-    <a href='/about'>About</a>
-    <a href='/blog'>Blog</a>
-    <hr />
+    <Header />
+
     <h1>{pageTitle}</h1>
     <p>Here are a few facts about me:</p>
     <ul>
@@ -44,10 +63,11 @@ const goal = 3;
         )
       }
     </ul>
+
     <p>My skills are:</p>
     <ul>
-      {skills.map((skill) => <li>{skill}</li>)}
-    </ul>{happy && <p>I am happy to be learning Astro!</p>}
+      {skills.map((skill) => <li class='skill'>{skill}</li>)}
+    </ul>
 
     {finished && <p>I finished this tutorial!</p>}
 
@@ -58,5 +78,6 @@ const goal = 3;
         <p>My goal is not 3 days.</p>
       )
     }
+    <Footer />
   </body>
 </html>
